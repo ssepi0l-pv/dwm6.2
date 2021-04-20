@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+if [ $(whoami) = 'root' ]
+then
+	make clean install
+	if [ $(echo $?) = 0 ]
+	then
+		echo 'mod+shift+q that bitch!'
+	elif [ $(echo $?) != 0 ]
+	then
+		echo 'something went wrong... check the code.'
+	fi
+fi

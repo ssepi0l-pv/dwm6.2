@@ -1,0 +1,2 @@
+use patch -p1 < autostart.diff , watch DT's video on pacthing dmenu to get an idea
+if errors are reported, there take a look at blahblah.rej file and add the lines with + and remove the lines with - in respective files mentioned

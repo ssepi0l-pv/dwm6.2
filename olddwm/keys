@@ -1,0 +1,11 @@
+static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *termcmd[]  = { "st", NULL };
+static const char *zim[]      = { "zim"      };
+static const char *emacs[]    = { "emacsclient","-c", "-a", "emacs"};
+static const char *mc[]       = { "alacritty", "-e", "mc"};
+static const char *firefox[]  = { "firefox" };
+static const char *spectacle[]= { "spectacle", "-g", "-f" }; 
+static const char *rofi[]     = { "rofi", "-show", "drun" }; 
+static const char *alacritty[]= { "alacritty" };
+static const char *mail[]     = { "alacritty", "-e", "neomutt" }; 
+static const char *keepass[]  = { "keepass", ".secret/Database.kdbx" };
