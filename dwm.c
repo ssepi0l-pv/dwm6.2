@@ -1077,7 +1077,7 @@ killclient(const Arg *arg)
 void
 layoutmenu(const Arg *arg) {
 	FILE *p;
-	char c[3], *s;
+	char c[5], *s;
 	int i;
 
 	if (!(p = popen(layoutmenu_cmd, "r")))
