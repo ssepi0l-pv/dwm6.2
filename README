@@ -1,5 +1,5 @@
 
-My DWM build version 6.2
+#My DWM build version 6.2
 
 Older build (5.8 I believe) is in the 'old' branch.
 Any configuration is and will be made in config.def.h since I miswrote the script to automatize the compilation process.
