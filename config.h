@@ -46,7 +46,9 @@ static const Layout layouts[] = {
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
  	{ "[@]",      spiral },
- 	{ "[\\]",      dwindle },
+ 	{ "[\\]",     dwindle },
+        { "|M|",      centeredmaster },
+        { ">M>",      centeredfloatingmaster },
 };
 
 /* key definitions */
@@ -73,7 +75,6 @@ static const char *layoutmenu_cmd = "layoutmenu.sh";
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_s,      togglebar,      {0} },
-        // Mina bindings, chapter 0
 	{ MODKEY,                       XK_Up,     focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Down,   focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_Left,   setmfact,       {.f = -0.05} },
@@ -81,12 +82,13 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-        // Moya bindings, chapter 1
 	{ MODKEY|ShiftMask,             XK_Up,     setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_Right,  setlayout,      {.v = &layouts[1]} },
 	{ MODKEY|ShiftMask,             XK_Left,   setlayout,      {.v = &layouts[2]} },
         { MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
         { MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
+        { MODKEY,                       XK_u,      setlayout,      {.v = &layouts[5]} },
+        { MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[6]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_F11,    togglefullscr,  {0} },
@@ -96,7 +98,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-        // Moi keybindings, chapter 2
         { MODKEY,                       XK_z,      spawn,          SHCMD("zim") },
         { MODKEY|ShiftMask,             XK_z,      spawn,          SHCMD("zoom") },
         { MODKEY,                       XK_Return, spawn,          SHCMD("emacsclient -c -a emacs") },
@@ -114,10 +115,8 @@ static Key keys[] = {
         { MODKEY,                       XK_x,      spawn,          SHCMD(TERMINAL " -e htop") },
         { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("pseint") },
         { MODKEY,                       XK_a,      spawn,          SHCMD("pavucontrol") },
-        // Patches (look at line 56)
         { MODKEY,                       XK_n,      shiftview,      {.i = +1 } },
         { MODKEY,                       XK_b,      shiftview,      {.i = -1 } },
-        // End patches.
         TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
