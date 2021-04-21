@@ -118,9 +118,20 @@ static Key keys[] = {
         { MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("keepass") },
         { MODKEY,                       XK_x,      spawn,          SHCMD(TERMINAL " -e htop") },
         { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("pseint") },
-        { MODKEY,                       XK_a,      spawn,          SHCMD("pavucontrol") },
+        { MODKEY,                       XK_a,      spawn,          SHCMD("pavucontrol") }, // mostly for when my mic gets fucked or something :)
         { MODKEY,                       XK_n,      shiftview,      {.i = +1 } },
         { MODKEY,                       XK_b,      shiftview,      {.i = -1 } },
+        { 0,                            XK_F10,    spawn,          SHCMD("pamixer -u") },
+        { ShiftMask,                    XK_F10,    spawn,          SHCMD("pamixer -m") },
+        { 0,                            XK_F11,    spawn,          SHCMD("amixer set Master 10%-") },
+        { 0,                            XK_F12,    spawn,          SHCMD("amixer set Master 10%+") },
+        { ShiftMask,                    XK_F11,    spawn,          SHCMD("mpc volume -10") },
+        { ShiftMask,                    XK_F12,    spawn,          SHCMD("mpc volume +10") },
+        { MODKEY,                       XK_F4,     spawn,          SHCMD("light -U 10") },
+        { MODKEY,                       XK_F5,     spawn,          SHCMD("light -A 10") },
+        { MODKEY,                       XK_bar,    spawn,          SHCMD(TERMINAL " -e ncmpcpp") },
+        { MODKEY,                       XK_period, spawn,          SHCMD("mpc prex") },
+        { MODKEY,                       XK_minus,  spawn,          SHCMD("mpc next") },
         TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
