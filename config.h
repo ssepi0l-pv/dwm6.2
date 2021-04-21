@@ -5,10 +5,14 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 15;       /* snap pixel */
+static const unsigned int snap      = 35;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10", "JoyPixels:pixelsize=10:antialias=true:autohint=true", "FontAwesome:pixelsize=10:antialias=true:autohint=true" };
+static const char *fonts[]          = { "FiraMono Nerd Font:size=11:antialias=true:autohint=true", 
+                                        "Material Design Icons:style:size=12:antialias=true:autohint=true",
+                                        "Font Awesome 5 Brands:size=9:antialias=true:autohint=true", 
+                                        "Mononoki Nerd Font:size=9:antialias=true:autohint=true"
+                        };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_bgb[]         = "#000000";
 static const char col_gray2[]       = "#444444";
@@ -22,7 +26,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "ﭮ", "", "嗢", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -110,8 +114,8 @@ static Key keys[] = {
         { 0,                            XK_Print,  spawn,          SHCMD("spectacle -g -f") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
         { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("rofi -show drun") },
-        { MODKEY,                       XK_m,      spawn,          SHCMD(TERMINAL " -e neomutt") }, 
-        { MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("keepass") }, 
+        { MODKEY,                       XK_m,      spawn,          SHCMD(TERMINAL " -e neomutt") },
+        { MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("keepass") },
         { MODKEY,                       XK_x,      spawn,          SHCMD(TERMINAL " -e htop") },
         { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("pseint") },
         { MODKEY,                       XK_a,      spawn,          SHCMD("pavucontrol") },
