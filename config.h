@@ -13,12 +13,12 @@ static const char *fonts[]          = { "FiraMono Nerd Font:size=11:antialias=tr
                                         "Font Awesome 5 Brands:size=9:antialias=true:autohint=true", 
                                         "Mononoki Nerd Font:size=9:antialias=true:autohint=true"
                         };
-static const char dmenufont[]       = "monospace:size=10";
-static const char col_bgb[]         = "#000000";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#e7e2bc";
-static const char col_bg[]          = "#141414";
+static const char dmenufont[]       = "monospace:size=10";       /* dmenu font                  */ 
+static const char col_bgb[]         = "#000000";                 /* tar background              */
+static const char col_gray2[]       = "#444444";                 /* bordercolor                 */
+static const char col_gray3[]       = "#bbbbbb";                 /* not highlighted text        */
+static const char col_gray4[]       = "#e7e2bc";                 /* highlighted text            */
+static const char col_bg[]          = "#141414";                 /* bar background              */ 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_bgb, col_gray2 },
@@ -27,7 +27,7 @@ static const char *colors[][3]      = {
 
 /* tagging */
 static const char *tags[] = { "", "", " ﭮ ", "", "嗢", "", "", "", "" };
-static const char *alttags[] = { "||", "||", "|ﭮ|", "||", "|嗢|", "||", "||", "||", "||" };
+static const char *alttags[] = { "> ", "> ", "> ﭮ", "> ", "> 嗢", "> ", "> ", "> ", "> " };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -120,12 +120,9 @@ static Key keys[] = {
         { MODKEY,                       XK_x,      spawn,          SHCMD(TERMINAL " -e htop") },
         { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("pseint") },
         { MODKEY,                       XK_a,      spawn,          SHCMD("pavucontrol") }, // mostly for when my mic gets fucked or something :)
-        { MODKEY,                       XK_n,      shiftview,      {.i = +1 } },
-        { MODKEY,                       XK_b,      shiftview,      {.i = -1 } },
-        { 0,                            XK_F10,    spawn,          SHCMD("pamixer -u") },
-        { ShiftMask,                    XK_F10,    spawn,          SHCMD("pamixer -m") },
-        { 0,                            XK_F11,    spawn,          SHCMD("amixer set Master 10%-") },
-        { 0,                            XK_F12,    spawn,          SHCMD("amixer set Master 10%+") },
+        { ShiftMask,                    XK_F10,    spawn,          SHCMD("pamixer -t") },
+        { 0,                            XK_F11,    spawn,          SHCMD("pamixer -d 10") },
+        { 0,                            XK_F12,    spawn,          SHCMD("pamixer -i 10") },
         { ShiftMask,                    XK_F11,    spawn,          SHCMD("mpc volume -10") },
         { ShiftMask,                    XK_F12,    spawn,          SHCMD("mpc volume +10") },
         { MODKEY,                       XK_F5,     spawn,          SHCMD("light -U 10") },
@@ -133,6 +130,8 @@ static Key keys[] = {
         { MODKEY,                       XK_bar,    spawn,          SHCMD(TERMINAL " -e ncmpcpp") },
         { MODKEY|ControlMask,           XK_comma,  spawn,          SHCMD("mpc prex") },
         { MODKEY|ControlMask,           XK_minus,  spawn,          SHCMD("mpc next") },
+        { MODKEY,                       XK_n,      shiftview,      {.i = +1 } },
+        { MODKEY,                       XK_b,      shiftview,      {.i = -1 } },
         TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
