@@ -26,8 +26,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", " ﭮ ", "", "嗢", "", "", "", "" };
-static const char *alttags[] = { "||", "||", "|ﭮ|", "||", "|嗢|", "||", "||", "||", "||" };
+static const char *tags[] = { "", "", "ﭮ", "", "嗢", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -128,11 +127,11 @@ static Key keys[] = {
         { 0,                            XK_F12,    spawn,          SHCMD("amixer set Master 10%+") },
         { ShiftMask,                    XK_F11,    spawn,          SHCMD("mpc volume -10") },
         { ShiftMask,                    XK_F12,    spawn,          SHCMD("mpc volume +10") },
-        { MODKEY,                       XK_F5,     spawn,          SHCMD("light -U 10") },
-        { MODKEY,                       XK_F6,     spawn,          SHCMD("light -A 10") },
+        { MODKEY,                       XK_F4,     spawn,          SHCMD("light -U 10") },
+        { MODKEY,                       XK_F5,     spawn,          SHCMD("light -A 10") },
         { MODKEY,                       XK_bar,    spawn,          SHCMD(TERMINAL " -e ncmpcpp") },
-        { MODKEY|ControlMask,           XK_comma,  spawn,          SHCMD("mpc prex") },
-        { MODKEY|ControlMask,           XK_minus,  spawn,          SHCMD("mpc next") },
+        { MODKEY,                       XK_period, spawn,          SHCMD("mpc prex") },
+        { MODKEY,                       XK_minus,  spawn,          SHCMD("mpc next") },
         TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
