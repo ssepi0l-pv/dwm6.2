@@ -108,7 +108,7 @@ static Key keys[] = {
         { MODKEY,                       XK_Return, spawn,          SHCMD("emacsclient -c -a emacs") },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          SHCMD(TERMINAL) },
         { MODKEY,                       XK_l,      spawn,          SHCMD("discord") },
-        { MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD(TERMINAL " -e mc") },
+        { MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD(TERMINAL " -e ranger") },
         { MODKEY,                       XK_f,      spawn,          SHCMD("firefox") },
         { MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("alacritty")},
         { ShiftMask,                    XK_Print,  spawn,          SHCMD("rofi -show file-browser") },
