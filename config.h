@@ -26,7 +26,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", " ﭮ ", "", "嗢", "", "", "", "" };
+static const char *tags[] = { "", "", "ﭮ", "", "嗢", "", "", "", "" };
 static const char *alttags[] = { "> ", "> ", "> ﭮ", "> ", "> 嗢", "> ", "> ", "> ", "> " };
 
 static const Rule rules[] = {
@@ -71,8 +71,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bgb, "-nf", col_gray3, "-sb", col_bg, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *dmenucmd[]     = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bgb, "-nf", col_gray3, "-sb", col_bg, "-sf", col_gray4, NULL };
+static const char *termcmd[]      = { "st", NULL };
 static const char *layoutmenu_cmd = "layoutmenu.sh";
 
 #include "shiftview.c"
@@ -90,10 +90,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Up,     setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_Right,  setlayout,      {.v = &layouts[1]} },
 	{ MODKEY|ShiftMask,             XK_Left,   setlayout,      {.v = &layouts[2]} },
-        { MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
-        { MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
-        { MODKEY,                       XK_u,      setlayout,      {.v = &layouts[5]} },
-        { MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[6]} },
+    { MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
+    { MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
+    { MODKEY,                       XK_u,      setlayout,      {.v = &layouts[5]} },
+    { MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[6]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_F11,    togglefullscr,  {0} },
@@ -103,36 +103,36 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-        { MODKEY,                       XK_z,      spawn,          SHCMD("zim") },
-        { MODKEY|ShiftMask,             XK_z,      spawn,          SHCMD("zoom") },
-        { MODKEY,                       XK_Return, spawn,          SHCMD("emacsclient -c -a emacs") },
+    { MODKEY,                       XK_z,      spawn,          SHCMD("zim") },
+    { MODKEY|ShiftMask,             XK_z,      spawn,          SHCMD("zoom") },
+    { MODKEY,                       XK_Return, spawn,          SHCMD("emacsclient -c -a emacs") },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          SHCMD(TERMINAL) },
-        { MODKEY,                       XK_l,      spawn,          SHCMD("discord") },
-        { MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD(TERMINAL " -e ranger") },
-        { MODKEY,                       XK_f,      spawn,          SHCMD("firefox") },
-        { MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("alacritty")},
-        { ShiftMask,                    XK_Print,  spawn,          SHCMD("rofi -show file-browser") },
-        { 0,                            XK_Print,  spawn,          SHCMD("spectacle -g -f") },
+    { MODKEY,                       XK_l,      spawn,          SHCMD("discord") },
+    { MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD(TERMINAL " -e ranger") },
+    { MODKEY,                       XK_f,      spawn,          SHCMD("firefox") },
+    { MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("alacritty")},
+    { ShiftMask,                    XK_Print,  spawn,          SHCMD("rofi -show file-browser") },
+    { 0,                            XK_Print,  spawn,          SHCMD("spectacle -g -f") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-        { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("rofi -show drun") },
-        { MODKEY,                       XK_m,      spawn,          SHCMD(TERMINAL " -e neomutt") },
-        { MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("keepass") },
-        { MODKEY,                       XK_x,      spawn,          SHCMD(TERMINAL " -e htop") },
-        { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("pseint") },
-        { MODKEY,                       XK_a,      spawn,          SHCMD("pavucontrol") }, // mostly for when my mic gets fucked or something :)
-        { ShiftMask,                    XK_F10,    spawn,          SHCMD("pamixer -t") },
-        { 0,                            XK_F11,    spawn,          SHCMD("pamixer -i 10") },
-        { 0,                            XK_F12,    spawn,          SHCMD("pamixer -d 10") },
-        { ShiftMask,                    XK_F11,    spawn,          SHCMD("mpc volume -10") },
-        { ShiftMask,                    XK_F12,    spawn,          SHCMD("mpc volume +10") },
-        { MODKEY,                       XK_F5,     spawn,          SHCMD("light -U 10") },
-        { MODKEY,                       XK_F6,     spawn,          SHCMD("light -A 10") },
-        { MODKEY,                       XK_bar,    spawn,          SHCMD(TERMINAL " -e ncmpcpp") },
-        { MODKEY|ControlMask,           XK_comma,  spawn,          SHCMD("mpc prex") },
-        { MODKEY|ControlMask,           XK_minus,  spawn,          SHCMD("mpc next") },
-        { MODKEY,                       XK_n,      shiftview,      {.i = +1 } },
-        { MODKEY,                       XK_b,      shiftview,      {.i = -1 } },
-        TAGKEYS(                        XK_1,                      0)
+    { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("rofi -show drun") },
+    { MODKEY,                       XK_m,      spawn,          SHCMD(TERMINAL " -e neomutt") },
+    { MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("keepass") },
+    { MODKEY,                       XK_x,      spawn,          SHCMD(TERMINAL " -e htop") },
+    { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("pseint") },
+    { MODKEY,                       XK_a,      spawn,          SHCMD("pavucontrol") }, // mostly for when my mic gets fucked or something :)
+    { ShiftMask,                    XK_F10,    spawn,          SHCMD("pamixer -t") },
+    { 0,                            XK_F11,    spawn,          SHCMD("pamixer -d 10") },
+    { 0,                            XK_F12,    spawn,          SHCMD("pamixer -i 10") },
+    { ShiftMask,                    XK_F11,    spawn,          SHCMD("mpc volume -10") },
+    { ShiftMask,                    XK_F12,    spawn,          SHCMD("mpc volume +10") },
+    { MODKEY,                       XK_F5,     spawn,          SHCMD("light -U 10") },
+    { MODKEY,                       XK_F6,     spawn,          SHCMD("light -A 10") },
+    { MODKEY,                       XK_bar,    spawn,          SHCMD(TERMINAL " -e ncmpcpp") },
+    { MODKEY|ControlMask,           XK_comma,  spawn,          SHCMD("mpc prex") },
+    { MODKEY|ControlMask,           XK_minus,  spawn,          SHCMD("mpc next") },
+    { MODKEY,                       XK_n,      shiftview,      {.i = +1 } },
+    { MODKEY,                       XK_b,      shiftview,      {.i = -1 } },
+    TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)

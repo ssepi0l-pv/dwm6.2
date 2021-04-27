@@ -26,7 +26,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", " ﭮ ", "", "嗢", "", "", "", "" };
+static const char *tags[] = { "", "", "ﭮ", "", "嗢", "", "", "", "" };
 static const char *alttags[] = { "> ", "> ", "> ﭮ", "> ", "> 嗢", "> ", "> ", "> ", "> " };
 
 static const Rule rules[] = {
@@ -74,7 +74,6 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[]     = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bgb, "-nf", col_gray3, "-sb", col_bg, "-sf", col_gray4, NULL };
 static const char *termcmd[]      = { "st", NULL };
 static const char *layoutmenu_cmd = "layoutmenu.sh";
-static const char *editor         = "emacsclient -c a emacs"
 
 #include "shiftview.c"
 
@@ -106,7 +105,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
     { MODKEY,                       XK_z,      spawn,          SHCMD("zim") },
     { MODKEY|ShiftMask,             XK_z,      spawn,          SHCMD("zoom") },
-    { MODKEY,                       XK_Return, spawn,          {.v = editor } },
+    { MODKEY,                       XK_Return, spawn,          SHCMD("emacsclient -c -a emacs") },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          SHCMD(TERMINAL) },
     { MODKEY,                       XK_l,      spawn,          SHCMD("discord") },
     { MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD(TERMINAL " -e ranger") },
