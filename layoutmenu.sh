@@ -8,4 +8,5 @@ cat <<EOF | xmenu
 [\\] Dwindle Layout	4
 |M| Centered Layout	5
 >M> Center Fl Layout	6
+|+| Tatami Layout	7
 EOF

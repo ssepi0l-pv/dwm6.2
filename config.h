@@ -13,6 +13,7 @@ static const char *fonts[]          = { "FiraMono Nerd Font:size=11:antialias=tr
                                         "Font Awesome 5 Brands:size=9:antialias=true:autohint=true", 
                                         "Mononoki Nerd Font:size=9:antialias=true:autohint=true"
                         };
+
 static const char dmenufont[]       = "monospace:size=10";       /* dmenu font                  */ 
 static const char col_bgb[]         = "#000000";                 /* tar background              */
 static const char col_gray2[]       = "#444444";                 /* bordercolor                 */
@@ -53,16 +54,18 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
+#include "tatami.c"
 #include "fibonacci.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
- 	{ "[@]",      spiral },
- 	{ "[\\]",     dwindle },
+        { "[]=",      tile },    /* first entry is default */
+        { "><>",      NULL },    /* no layout function means floating behavior */
+        { "[M]",      monocle },
+        { "[@]",      spiral },
+        { "[\\]",     dwindle },
         { "|M|",      centeredmaster },
         { ">M>",      centeredfloatingmaster },
+        { "|+|",      tatami },
 };
 
 /* key definitions */
@@ -87,70 +90,71 @@ static const char *layoutmenu_cmd = "layoutmenu.sh";
 #include "shiftview.c"
 
 static Key keys[] = {
-	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_s,      togglebar,      {0} },
-	{ MODKEY,                       XK_Up,     focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_Down,   focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_Left,   setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_Right,  setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY|ShiftMask,             XK_Up,     setlayout,      {.v = &layouts[0]} },
-	{ MODKEY|ShiftMask,             XK_Right,  setlayout,      {.v = &layouts[1]} },
-	{ MODKEY|ShiftMask,             XK_Left,   setlayout,      {.v = &layouts[2]} },
-    { MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
-    { MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
-    { MODKEY,                       XK_u,      setlayout,      {.v = &layouts[5]} },
-    { MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[6]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY|ShiftMask,             XK_F11,    togglefullscr,  {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-    { MODKEY,                       XK_z,      spawn,          SHCMD("zim") },
-    { MODKEY|ShiftMask,             XK_z,      spawn,          SHCMD("zoom") },
-    { MODKEY,                       XK_Return, spawn,          SHCMD("emacsclient -c -a emacs") },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          SHCMD(TERMINAL) },
-    { MODKEY,                       XK_l,      spawn,          SHCMD("discord") },
-    { MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD(TERMINAL " -e ranger") },
-    { MODKEY,                       XK_f,      spawn,          SHCMD("firefox") },
-    { MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("alacritty")},
-    { ShiftMask,                    XK_Print,  spawn,          SHCMD("rofi -show file-browser") },
-    { 0,                            XK_Print,  spawn,          SHCMD("flameshot gui") },
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-    { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("rofi -show drun") },
-    { MODKEY,                       XK_m,      spawn,          SHCMD(TERMINAL " -e neomutt") },
-    { MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("keepass") },
-    { MODKEY,                       XK_x,      spawn,          SHCMD(TERMINAL " -e htop") },
-    { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("pseint") },
-    { MODKEY,                       XK_a,      spawn,          SHCMD("pavucontrol") }, // mostly for when my mic gets fucked or something :)
-    { ShiftMask,                    XK_F10,    spawn,          SHCMD("pamixer -t") },
-    { 0,                            XK_F11,    spawn,          SHCMD("pamixer -d 10") },
-    { 0,                            XK_F12,    spawn,          SHCMD("pamixer -i 10") },
-    { ShiftMask,                    XK_F11,    spawn,          SHCMD("mpc volume -10") },
-    { ShiftMask,                    XK_F12,    spawn,          SHCMD("mpc volume +10") },
-    { MODKEY,                       XK_F5,     spawn,          SHCMD("light -U 10") },
-    { MODKEY,                       XK_F6,     spawn,          SHCMD("light -A 10") },
-    { MODKEY,                       XK_bar,    spawn,          SHCMD(TERMINAL " -e ncmpcpp") },
-    { MODKEY|ControlMask,           XK_comma,  spawn,          SHCMD("mpc prex") },
-    { MODKEY|ControlMask,           XK_minus,  spawn,          SHCMD("mpc next") },
-    { MODKEY,                       XK_n,      shiftview,      {.i = +1 } },
-    { MODKEY,                       XK_b,      shiftview,      {.i = -1 } },
-    TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+        /* modifier                     key        function        argument */
+        { MODKEY,                       XK_s,      togglebar,      {0} },
+        { MODKEY,                       XK_Up,     focusstack,     {.i = +1 } },
+        { MODKEY,                       XK_Down,   focusstack,     {.i = -1 } },
+        { MODKEY,                       XK_Left,   setmfact,       {.f = -0.05} },
+        { MODKEY,                       XK_Right,  setmfact,       {.f = +0.05} },
+        { MODKEY,                       XK_Return, zoom,           {0} },
+        { MODKEY,                       XK_Tab,    view,           {0} },
+        { MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+        { MODKEY|ShiftMask,             XK_Up,     setlayout,      {.v = &layouts[0]} },
+        { MODKEY|ShiftMask,             XK_Right,  setlayout,      {.v = &layouts[1]} },
+        { MODKEY|ShiftMask,             XK_Left,   setlayout,      {.v = &layouts[2]} },
+        { MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
+        { MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
+        { MODKEY,                       XK_u,      setlayout,      {.v = &layouts[5]} },
+        { MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[6]} },
+        { MODKEY,                       XK_y,      setlayout,      {.v = &layouts[7]} },
+        { MODKEY,                       XK_space,  setlayout,      {0} },
+        { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+        { MODKEY|ShiftMask,             XK_F11,    togglefullscr,  {0} },
+        { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+        { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+        { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
+        { MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+        { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+        { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+        { MODKEY,                       XK_z,      spawn,          SHCMD("zim") },
+        { MODKEY|ShiftMask,             XK_z,      spawn,          SHCMD("zoom") },
+        { MODKEY,                       XK_Return, spawn,          SHCMD("emacsclient -c -a emacs") },
+        { MODKEY|ShiftMask,             XK_Return, spawn,          SHCMD(TERMINAL) },
+        { MODKEY,                       XK_l,      spawn,          SHCMD("discord") },
+        { MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD(TERMINAL " -e ranger") },
+        { MODKEY,                       XK_f,      spawn,          SHCMD("firefox") },
+        { MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("alacritty")},
+        { ShiftMask,                    XK_Print,  spawn,          SHCMD("rofi -show file-browser") },
+        { 0,                            XK_Print,  spawn,          SHCMD("flameshot gui") },
+        { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+        { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("rofi -show drun") },
+        { MODKEY,                       XK_m,      spawn,          SHCMD(TERMINAL " -e neomutt") },
+        { MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("keepass") },
+        { MODKEY,                       XK_x,      spawn,          SHCMD(TERMINAL " -e htop") },
+        { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("pseint") },
+        { MODKEY,                       XK_a,      spawn,          SHCMD("pavucontrol") }, // mostly for when my mic gets fucked or something :)
+        { ShiftMask,                    XK_F10,    spawn,          SHCMD("pamixer -t") },
+        { 0,                            XK_F11,    spawn,          SHCMD("pamixer -d 10") },
+        { 0,                            XK_F12,    spawn,          SHCMD("pamixer -i 10") },
+        { ShiftMask,                    XK_F11,    spawn,          SHCMD("mpc volume -10") },
+        { ShiftMask,                    XK_F12,    spawn,          SHCMD("mpc volume +10") },
+        { MODKEY,                       XK_F5,     spawn,          SHCMD("light -U 10") },
+        { MODKEY,                       XK_F6,     spawn,          SHCMD("light -A 10") },
+        { MODKEY,                       XK_bar,    spawn,          SHCMD(TERMINAL " -e ncmpcpp") },
+        { MODKEY|ControlMask,           XK_comma,  spawn,          SHCMD("mpc prex") },
+        { MODKEY|ControlMask,           XK_minus,  spawn,          SHCMD("mpc next") },
+        { MODKEY,                       XK_n,      shiftview,      {.i = +1 } },
+        { MODKEY,                       XK_b,      shiftview,      {.i = -1 } },
+        TAGKEYS(                        XK_1,                      0)
+        TAGKEYS(                        XK_2,                      1)
+        TAGKEYS(                        XK_3,                      2)
+        TAGKEYS(                        XK_4,                      3)
+        TAGKEYS(                        XK_5,                      4)
+        TAGKEYS(                        XK_6,                      5)
+        TAGKEYS(                        XK_7,                      6)
+        TAGKEYS(                        XK_8,                      7)
+        TAGKEYS(                        XK_9,                      8)
+        { MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
 /* button definitions */
