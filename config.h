@@ -58,14 +58,14 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 #include "fibonacci.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-        { "[]=",      tile },    /* first entry is default */
-        { "><>",      NULL },    /* no layout function means floating behavior */
-        { "[M]",      monocle },
-        { "[@]",      spiral },
-        { "[\\]",     dwindle },
-        { "|M|",      centeredmaster },
-        { ">M>",      centeredfloatingmaster },
-        { "|+|",      tatami },
+        { "[]=",      tile },                   /* first entry is default */
+        { "><>",      NULL },                   /* no layout function means floating behavior */
+        { "[M]",      monocle },                /* windows on top of each other */
+        { "[@]",      spiral },                 /* fibonacci layout; an inside spiral */
+        { "[\\]",     dwindle },                /* dwindle layout; an outgoing spiral  */
+        { "|M|",      centeredmaster },         /* center window is master. others are at the sides  */
+        { ">M>",      centeredfloatingmaster }, /* center windows floating, pretty self-explanatory */
+        { "|+|",      tatami },                 /* tatami layout, windows tile in tatami-like layout */
 };
 
 /* key definitions */
