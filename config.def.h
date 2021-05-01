@@ -121,7 +121,7 @@ static Key keys[] = {
     { MODKEY,                       XK_f,      spawn,          SHCMD("firefox") },
     { MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("alacritty")},
     { ShiftMask,                    XK_Print,  spawn,          SHCMD("rofi -show file-browser") },
-    { 0,                            XK_Print,  spawn,          SHCMD("spectacle -g -f") },
+    { 0,                            XK_Print,  spawn,          SHCMD("flameshot gui") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("rofi -show drun") },
     { MODKEY,                       XK_m,      spawn,          SHCMD(TERMINAL " -e neomutt") },
