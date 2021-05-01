@@ -8,8 +8,8 @@ binaries
 If you don't know what you're doing and you want to install my build, you can run the "install.sh" script
 that's inside this folder. But first, you have to do this:
 
-`cp install.sh ../`
-`sudo chmod +x install.sh`
-`sudo ./install.sh`
-`cp layoutmenu.sh $HOME/.local/bin/layoutmenu.sh`
+>`cp install.sh ../`
+>`sudo chmod +x install.sh`
+>`sudo ./install.sh`
+>`cp layoutmenu.sh $HOME/.local/bin/layoutmenu.sh`
 
