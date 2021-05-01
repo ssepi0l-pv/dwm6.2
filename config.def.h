@@ -19,11 +19,20 @@ static const char col_gray2[]       = "#444444";                 /* bordercolor 
 static const char col_gray3[]       = "#bbbbbb";                 /* not highlighted text        */
 static const char col_gray4[]       = "#e7e2bc";                 /* highlighted text            */
 static const char col_bg[]          = "#141414";                 /* bar background              */ 
+static const unsigned int baralpha  = 0xd0;
+static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_bgb, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_bg,  col_bg    },
 };
+static const unsigned int alphas[][3]      = {
+        /*               fg      bg        border     */
+        [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
+        [SchemeSel]  = { OPAQUE, baralpha, borderalpha },
+};
+
+
 
 /* tagging */
 static const char *tags[] = { "", "", "ﭮ", "", "嗢", "", "", "", "" };
