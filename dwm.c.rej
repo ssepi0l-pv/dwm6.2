@@ -1,0 +1,48 @@
+--- dwm.c
++++ dwm.c
+@@ -446,9 +451,34 @@ buttonpress(XEvent *e)
+ 			arg.ui = 1 << i;
+ 		} else if (ev->x < x + blw)
+ 			click = ClkLtSymbol;
+-		else if (ev->x > selmon->ww - (int)TEXTW(stext))
++		else if (ev->x > selmon->ww - statusw) {
++			x = selmon->ww - statusw;
+ 			click = ClkStatusText;
+-		else
++
++			char *text, *s, ch;
++			statussig = 0;
++			for (text = s = stext; *s && x <= ev->x; s++) {
++				if ((unsigned char)(*s) < ' ') {
++					ch = *s;
++					*s = '\0';
++					x += TEXTW(text) - lrpad;
++					*s = ch;
++					text = s + 1;
++					if (x >= ev->x)
++						break;
++					statussig = ch;
++				} else if (*s == '^') {
++					*s = '\0';
++					x += TEXTW(text) - lrpad;
++					*s = '^';
++					if (*(++s) == 'f')
++						x += atoi(++s);
++					while (*(s++) != '^');
++					text = s;
++					s--;
++				}
++			}
++		} else
+ 			click = ClkWinTitle;
+ 	} else if ((c = wintoclient(ev->window))) {
+ 		focus(c);
+@@ -823,7 +858,7 @@ drawbar(Monitor *m)
+ 
+ 	/* draw status first so it can be overdrawn by tags later */
+ 	if (m == selmon) { /* status is only drawn on selected monitor */
+-		tw = m->ww - drawstatusbar(m, bh, stext);
++		tw = statusw = m->ww - drawstatusbar(m, bh, stext);
+ 	}
+ 
+ 	for (c = m->clients; c; c = c->next) {
