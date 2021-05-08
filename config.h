@@ -118,7 +118,7 @@ static Key keys[] = {
         { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
         { MODKEY,                       XK_z,      spawn,          SHCMD("zim") },
         { MODKEY|ShiftMask,             XK_z,      spawn,          SHCMD("zoom") },
-        { MODKEY,                       XK_Return, spawn,          SHCMD("emacsclient -c -a emacs") },
+        { MODKEY|ControlMask,           XK_Return, spawn,          SHCMD("emacsclient -c -a emacs") },
         { MODKEY|ShiftMask,             XK_Return, spawn,          SHCMD(TERMINAL) },
         { MODKEY,                       XK_l,      spawn,          SHCMD("discord") },
         { MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD(TERMINAL " -e ranger") },
