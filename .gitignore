@@ -1,0 +1,5 @@
+# Ignore the PKGBUILD, since it has no real use at the moment.
+PKGBUILD
+# Ignores .rej and .orig files so in following commits they'll not be added.
+*.rej
+*.orig
