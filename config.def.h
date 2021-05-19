@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#define TERMINAL "st"
-#define TERMCLASS "St"
+#define TERMINAL "alacritty"
+#define TERMCLASS "Alacritty"
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -84,7 +84,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]     = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bgb, "-nf", col_gray3, "-sb", col_bg, "-sf", col_gray4, NULL };
-static const char *termcmd[]      = { "st", NULL };
+static const char *termcmd[]      = { "alacritty", NULL };
 static const char *layoutmenu_cmd = "layoutmenu.sh";
 
 #include "shiftview.c"
@@ -123,7 +123,7 @@ static Key keys[] = {
         { MODKEY,                       XK_l,      spawn,          SHCMD("discord") },
         { MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD(TERMINAL " -e ranger") },
         { MODKEY,                       XK_f,      spawn,          SHCMD("firefox") },
-        { MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("alacritty")},
+        { MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("st")},
         { ShiftMask,                    XK_Print,  spawn,          SHCMD("rofi -show file-browser") },
         { 0,                            XK_Print,  spawn,          SHCMD("flameshot gui") },
         { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
