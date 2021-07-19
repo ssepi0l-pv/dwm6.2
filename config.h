@@ -1,11 +1,16 @@
 /* See LICENSE file for copyright and license details. */
 
-#define TERMINAL "alacritty"
-#define TERMCLASS "Alacritty"
+#define TERMINAL "st"
+#define TERMCLASS "St"
+#define B_TERMINAL "alacritty"
+#define B_TERMCLASS "Alacritty"
+#define EDITOR "nvim"
+#define WM_NAME "LG3D"
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 35;       /* snap pixel */
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "FiraMono Nerd Font:size=11:antialias=true:autohint=true", 
@@ -14,7 +19,7 @@ static const char *fonts[]          = { "FiraMono Nerd Font:size=11:antialias=tr
                                         "Mononoki Nerd Font:size=9:antialias=true:autohint=true"
                         };
 
-static const char dmenufont[]       = "monospace:size=10";       /* dmenu font                  */ 
+static const char dmenufont[]       = "FiraMono Nerd Font:size=10";       /* dmenu font                  */ 
 static const char col_bgb[]         = "#000000";                 /* tar background              */
 static const char col_gray2[]       = "#444444";                 /* bordercolor                 */
 static const char col_gray3[]       = "#bbbbbb";                 /* not highlighted text        */
@@ -44,9 +49,12 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class      instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
+	{ "Gimp",      NULL,     NULL,           0,         1,          0,           0,        -1 },
+	{ "Firefox",   NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
+        //{ "Alacritty", NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ "St",        NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ NULL,        NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -84,7 +92,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]     = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bgb, "-nf", col_gray3, "-sb", col_bg, "-sf", col_gray4, NULL };
-static const char *termcmd[]      = { "alacritty", NULL };
+static const char *termcmd[]      = { "st", NULL };
 static const char *layoutmenu_cmd = "layoutmenu.sh";
 
 #include "shiftview.c"
@@ -118,8 +126,9 @@ static Key keys[] = {
         { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
         { MODKEY,                       XK_z,      spawn,          SHCMD("zim") },
         { MODKEY|ShiftMask,             XK_z,      spawn,          SHCMD("zoom") },
-        { MODKEY|ControlMask,           XK_Return, spawn,          SHCMD("emacsclient -c -a emacs") },
-        { MODKEY|ShiftMask,             XK_Return, spawn,          SHCMD(TERMINAL) },
+        //{ MODKEY|ControlMask,           XK_Return, spawn,          SHCMD("emacsclient -c -a emacs") },
+        { MODKEY|ControlMask,           XK_Return, spawn,          SHCMD(TERMINAL " -e nvim") },
+        { MODKEY|ShiftMask,             XK_Return, spawn,          SHCMD(B_TERMINAL) },
         { MODKEY,                       XK_l,      spawn,          SHCMD("discord") },
         { MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD(TERMINAL " -e ranger") },
         { MODKEY,                       XK_f,      spawn,          SHCMD("firefox") },
@@ -140,7 +149,7 @@ static Key keys[] = {
         { ShiftMask,                    XK_F12,    spawn,          SHCMD("mpc volume +10") },
         { MODKEY,                       XK_F5,     spawn,          SHCMD("light -U 10") },
         { MODKEY,                       XK_F6,     spawn,          SHCMD("light -A 10") },
-        { MODKEY,                       XK_bar,    spawn,          SHCMD(TERMINAL " -e ncmpcpp") },
+        { MODKEY,                       XK_bar,    spawn,          SHCMD(TERMINAL " -e tauon") },
         { MODKEY|ControlMask,           XK_comma,  spawn,          SHCMD("mpc prex") },
         { MODKEY|ControlMask,           XK_minus,  spawn,          SHCMD("mpc next") },
         { MODKEY,                       XK_n,      shiftview,      {.i = +1 } },
