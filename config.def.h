@@ -6,6 +6,7 @@
 #define B_TERMCLASS "Alacritty"
 #define EDITOR "nvim"
 #define WM_NAME "LG3D"
+#define _JAVA_AWT_WM_NONREPARENTING=1
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -52,7 +53,7 @@ static const Rule rules[] = {
 	/* class      instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "Gimp",      NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "Firefox",   NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
-        //{ "Alacritty", NULL,     NULL,           0,         0,          1,           0,        -1 },
+        { "Alacritty", NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ "St",        NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ NULL,        NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
