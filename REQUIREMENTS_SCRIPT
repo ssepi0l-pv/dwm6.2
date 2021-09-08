@@ -1,0 +1,26 @@
+if you wanna add some packages, go ahead! you'll need to modify a part of the
+range of the lines inside of the sed -n command.
+
+pacman packages:
+
+pamixer
+mpc
+mpd 
+ncmpcpp
+htop
+zim
+emacs
+discord
+alacritty
+rofi
+spectacle
+keepass
+pavucontrol
+
+AUR packages:
+
+tauon-music-box
+nerd-fonts-complete
+nerd-fonts-dejavu-complete
+ttf-joypixels
+light-git
