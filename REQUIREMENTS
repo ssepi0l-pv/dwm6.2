@@ -12,7 +12,7 @@ just add the "important" packages (i.e: I don't think you'll need Zoom Meetings,
 
 For Arch-based users:
 
-pacman -S zim emacs discord alacritty rofi spectacle keepass pavucontrol pamixer amixer mpc mpd ncmpcpp htop
+pacman -S zim emacs discord alacritty rofi spectacle keepass pavucontrol pamixer mpc mpd ncmpcpp htop
 
 And you'll also need some packages from the AUR:
 

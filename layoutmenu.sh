@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Not working ATM. Shows layouts until Tamami layout.
-
 cat <<EOF | xmenu
 []= Tiled Layout	0
 ><> Floating Layout	1
